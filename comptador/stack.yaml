@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+
+  redis:
+    image: redis
+    networks:
+      - backend
+
+  front:
+    image: kpeiruza/docker-php-mysql-redis
+    networks:
+      - proxy
+      - backend
+    ports:
+      - "80"
+    deploy:
+      replicas: 10
+      endpoint_mode: vip
+      labels:
+        traefik.port: 80
+        traefik.frontend.rule: "Host: comptador.35.240.120.88.nip.io,comptador.35.205.206.66.nip.io,comptador.35.205.149.196.nip.io"
+        traefik.docker.network: 'proxy'
+
+networks:
+  proxy:
+    external: true
+  backend:
+    driver: 'overlay'
