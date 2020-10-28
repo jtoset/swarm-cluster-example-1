@@ -19,7 +19,7 @@ services:
       endpoint_mode: vip
       labels:
         traefik.port: 80
-        traefik.frontend.rule: "Host: comptador.35.240.120.88.nip.io,comptador.35.205.206.66.nip.io,comptador.35.205.149.196.nip.io"
+        traefik.frontend.rule: "Host: comptador.${IP1}.nip.io,comptador.${IP2}.nip.io,comptador.${IP3}.nip.io"
         traefik.docker.network: 'proxy'
 
 networks:
